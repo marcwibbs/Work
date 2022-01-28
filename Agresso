@@ -1,0 +1,1369 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Unit4 WebAPI documentation",
+    "description": "Unit4 WebAPI documentation"
+  },
+  "host": "sr0281gla",
+  "basePath": "/Unit4ERP-web-api",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "x-ntx-render-version": 2,
+  "paths": {
+    "/v1/batch-documents/import-files": {
+      "put": {
+        "tags": [
+          "Batch Documents"
+        ],
+        "summary": "Add or replace input files for batch processing",
+        "operationId": "ImportFiles_PutFile",
+        "x-ntx-summary": "Import NWC Documents",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "The file to put",
+            "required": true,
+            "type": "file",
+            "x-ntx-summary": "NWC document import"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "x-ntx-summary": "confirmation,",
+              "items": {
+                "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.FileUploadResult"
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "type": "string",
+              "x-ntx-summary": "bad request"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "type": "string",
+              "x-ntx-summary": "upload conflict"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "Batch Documents"
+        ],
+        "summary": "Add input files for batch processing",
+        "operationId": "ImportFiles_PostFile",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "The file to post",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "x-ntx-summary": "file uploaded,",
+              "items": {
+                "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.FileUploadResult"
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "type": "string",
+              "x-ntx-summary": "file not uploaded,"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "type": "string",
+              "x-ntx-summary": "file upload conflict"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/companies/{companyId}": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "operationId": "Company_Get",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.Objects.Setup"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "/definitions/Unit4.PublicApi.NotificationInformation"
+            }
+          },
+          "404": {
+            "description": "NotFound",
+            "schema": {
+              "$ref": "/definitions/Unit4.PublicApi.NotificationInformation"
+            }
+          },
+          "410": {
+            "description": "Gone",
+            "schema": {
+              "$ref": "/definitions/Unit4.PublicApi.NotificationInformation"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "Companies"
+        ],
+        "operationId": "Company_Update",
+        "consumes": [
+          "application/json-patch+json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "patch",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Unit4.PublicApi.PatchOperation"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.Objects.Setup"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "/definitions/Unit4.PublicApi.NotificationInformation"
+            }
+          },
+          "404": {
+            "description": "NotFound",
+            "schema": {
+              "$ref": "/definitions/Unit4.PublicApi.NotificationInformation"
+            }
+          },
+          "410": {
+            "description": "Gone",
+            "schema": {
+              "$ref": "#/definitions/Unit4.PublicApi.NotificationInformation"
+            }
+          },
+          "422": {
+            "description": "UnprocessableEntity",
+            "schema": {
+              "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.Objects.Setup"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/companies": {
+      "post": {
+        "tags": [
+          "Companies"
+        ],
+        "operationId": "Company_Create",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded",
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "setup",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.Objects.Setup"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.Objects.Setup"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "/definitions/Unit4.PublicApi.NotificationInformation"
+            }
+          },
+          "404": {
+            "description": "NotFound",
+            "schema": {
+              "$ref": "#/definitions/Unit4.PublicApi.NotificationInformation"
+            }
+          },
+          "410": {
+            "description": "Gone",
+            "schema": {
+              "$ref": "/definitions/Unit4.PublicApi.NotificationInformation"
+            }
+          },
+          "422": {
+            "description": "UnprocessableEntity",
+            "schema": {
+              "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.Objects.Setup"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/objects/companies": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Basic information about your companies.",
+        "description": "Basic information about your companies.",
+        "operationId": "Objects_GetCompanies",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.Objects.Company"
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "/definitions/Unit4.PublicApi.NotificationInformation"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/currency-codes": {
+      "post": {
+        "tags": [
+          "Currency Codes"
+        ],
+        "operationId": "CurrencyCode_Create",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded",
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "currencyCode",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.Objects.CurrencyCode"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.Objects.CurrencyCode"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "/definitions/Unit4.PublicApi.NotificationInformation"
+            }
+          },
+          "404": {
+            "description": "NotFound",
+            "schema": {
+              "$ref": "/definitions/Unit4.PublicApi.NotificationInformation"
+            }
+          },
+          "410": {
+            "description": "Gone",
+            "schema": {
+              "$ref": "/definitions/Unit4.PublicApi.NotificationInformation"
+            }
+          },
+          "422": {
+            "description": "UnprocessableEntity",
+            "schema": {
+              "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.Objects.CurrencyCode"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "basicAuth": {
+      "type": "basic"
+    }
+  },
+  "definitions": {
+    "Unit4.PublicApi.NotificationInformation": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "Unit4.BusinessWorld.PublicApi.ContactPoints.AdditionalInformation": {
+      "description": "AdditionalContactInfo group DTO",
+      "type": "object",
+      "properties": {
+        "contactPerson": {
+          "title": "Contact person",
+          "description": "Contact persons name",
+          "maxLength": 255,
+          "minLength": 0,
+          "type": "string"
+        },
+        "contactPosition": {
+          "title": "Contact position",
+          "description": "Contact persons position",
+          "maxLength": 35,
+          "minLength": 0,
+          "type": "string"
+        },
+        "eMail": {
+          "title": "E-mail",
+          "description": "E-mail address",
+          "maxLength": 255,
+          "minLength": 0,
+          "type": "string"
+        },
+        "eMailCc": {
+          "title": "E-mail cc",
+          "description": "E-mail copy address",
+          "maxLength": 255,
+          "minLength": 0,
+          "type": "string"
+        },
+        "gtin": {
+          "title": "EAN",
+          "description": "Global Trade Item Number, e.g. EAN - European Article Number",
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string"
+        },
+        "url": {
+          "title": "URL",
+          "description": "Url - internet address",
+          "maxLength": 255,
+          "minLength": 0,
+          "type": "string"
+        },
+        "notificationMessages": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "/definitions/Unit4.PublicApi.NotificationInformation"
+            }
+          }
+        }
+      }
+    },
+    "Unit4.BusinessWorld.PublicApi.ContactPoints.AddressInformation": {
+      "description": "Address group DTO",
+      "type": "object",
+      "properties": {
+        "countryCode": {
+          "title": "Country code",
+          "description": "Country code",
+          "maxLength": 25,
+          "minLength": 0,
+          "type": "string",
+          "x-u4-attribute": {
+            "attributeId": "C9",
+            "metadata": "/v2/attributes/C9",
+            "values": "/v2/attribute-values/C9"
+          }
+        },
+        "place": {
+          "title": "Town/City",
+          "description": "City/place",
+          "maxLength": 40,
+          "minLength": 0,
+          "type": "string"
+        },
+        "postcode": {
+          "title": "Postcode",
+          "description": "Postal/zip code",
+          "maxLength": 15,
+          "minLength": 0,
+          "type": "string"
+        },
+        "province": {
+          "title": "County",
+          "description": "Province/state\r\n                Text 40",
+          "maxLength": 40,
+          "minLength": 0,
+          "type": "string"
+        },
+        "streetAddress": {
+          "title": "Street address",
+          "description": "Street address",
+          "maxLength": 160,
+          "minLength": 0,
+          "type": "string"
+        },
+        "notificationMessages": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "/definitions/Unit4.PublicApi.NotificationInformation"
+            }
+          }
+        }
+      }
+    },
+    "Unit4.PublicApi.PatchOperation": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "op": {
+          "enum": [
+            [
+              "Add"
+            ],
+            [
+              "Replace"
+            ],
+            [
+              "Remove"
+            ],
+            [
+              "AddOrReplaceById"
+            ],
+            [
+              "ReplaceById"
+            ],
+            [
+              "RemoveById"
+            ]
+          ],
+          "type": "string"
+        },
+        "value": {
+          "$ref": "/definitions/Object"
+        }
+      }
+    },
+    "Unit4.BusinessWorld.PublicApi.FileUploadResult": {
+      "type": "object",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "originalFileName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "file": {
+          "$ref": "/definitions/Object",
+          "readOnly": true
+        }
+      }
+    },
+    "Unit4.BusinessWorld.PublicApi.Objects.CurrencyCode": {
+      "title": "Currency code",
+      "required": [
+        "currency",
+        "currencyUnit",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "bank": {
+          "title": "Bank",
+          "type": "string",
+          "x-u4-attribute": {
+            "attributeId": "GI",
+            "metadata": "/v2/attributes/GI",
+            "values": "/v2/attribute-values/GI"
+          },
+          "x-u4-filterable": {
+            "filterable": true
+          },
+          "x-u4-describable": {
+            "propertyName": "bank(description)"
+          }
+        },
+        "company": {
+          "title": "Company",
+          "type": "string",
+          "x-u4-attribute": {
+            "attributeId": "A3",
+            "metadata": "/v2/attributes/A3",
+            "values": "/v2/attribute-values/A3"
+          },
+          "x-u4-filterable": {
+            "filterable": true
+          },
+          "x-u4-describable": {
+            "propertyName": "company(description)"
+          }
+        },
+        "currency": {
+          "title": "Currency",
+          "type": "string",
+          "x-u4-attribute": {
+            "attributeId": "A2",
+            "metadata": "/v2/attributes/A2",
+            "values": "/v2/attribute-values/A2"
+          },
+          "x-u4-filterable": {
+            "filterable": true
+          },
+          "x-u4-describable": {
+            "propertyName": "currency(description)"
+          }
+        },
+        "currencyUnit": {
+          "format": "int32",
+          "title": "Currency unit",
+          "type": "integer",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "flag": {
+          "title": "Flag",
+          "type": "boolean",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "updated": {
+          "format": "date-time",
+          "title": "Updated",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "limit": {
+          "format": "double",
+          "title": "Limit",
+          "type": "number",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "numberOfDecimals": {
+          "format": "int32",
+          "title": "Number of decimals",
+          "type": "integer",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "sequenceNumber": {
+          "format": "int32",
+          "title": "Sequence number",
+          "type": "integer",
+          "x-u4-attribute": {
+            "attributeId": "A23",
+            "metadata": "/v2/attributes/A23",
+            "values": "/v2/attribute-values/A23"
+          },
+          "x-u4-filterable": {
+            "filterable": true
+          },
+          "x-u4-describable": {
+            "propertyName": "sequenceNumber(description)"
+          }
+        },
+        "updatedBy": {
+          "title": "Updated by",
+          "type": "string",
+          "x-u4-attribute": {
+            "attributeId": "GN",
+            "metadata": "/v2/attributes/GN",
+            "values": "/v2/attribute-values/GN"
+          },
+          "x-u4-filterable": {
+            "filterable": true
+          },
+          "x-u4-describable": {
+            "propertyName": "updatedBy(description)"
+          }
+        },
+        "notificationMessages": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "/definitions/Unit4.PublicApi.NotificationInformation"
+            }
+          }
+        }
+      }
+    },
+    "Unit4.BusinessWorld.PublicApi.Objects.Company": {
+      "description": "Basic information about your companies.",
+      "type": "object",
+      "properties": {
+        "companyId": {
+          "title": "Company",
+          "description": "Company",
+          "type": "string",
+          "x-u4-attribute": {
+            "attributeId": "A3",
+            "metadata": "v1/attributes/A3",
+            "values": "v1/attribute-values/A3"
+          },
+          "x-u4-describable": {
+            "propertyName": "companyId(description)"
+          },
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "companyName": {
+          "title": "Company name",
+          "description": "Company name",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "companyRegistrationNumber": {
+          "title": "Company registration number",
+          "description": "Company registration number",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "country": {
+          "title": "Country",
+          "description": "Country",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "countryCode": {
+          "title": "Country code",
+          "description": "Country code",
+          "type": "string",
+          "x-u4-attribute": {
+            "attributeId": "C9",
+            "metadata": "v1/attributes/C9",
+            "values": "v1/attribute-values/C9"
+          },
+          "x-u4-describable": {
+            "propertyName": "countryCode(description)"
+          },
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "currentAccountingPeriod": {
+          "format": "int32",
+          "title": "Current accounting period",
+          "description": "Current accounting period",
+          "type": "integer",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "employerId": {
+          "title": "Employer ID",
+          "description": "Employer ID",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "languageCode": {
+          "title": "Language",
+          "description": "Language",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "maximumPaymentDifference": {
+          "format": "double",
+          "title": "Maximum payment difference",
+          "description": "Maximum payment difference",
+          "type": "number",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "maximumTransactionDifference": {
+          "format": "double",
+          "title": "Maximum transaction difference",
+          "description": "Maximum transaction difference",
+          "type": "number",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "municipal": {
+          "title": "Municipal",
+          "description": "Municipal",
+          "type": "string",
+          "x-u4-attribute": {
+            "attributeId": "CA",
+            "metadata": "v1/attributes/CA",
+            "values": "v1/attribute-values/CA"
+          },
+          "x-u4-describable": {
+            "propertyName": "municipal(description)"
+          },
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "numberOfPeriods": {
+          "format": "int32",
+          "title": "Number of periods",
+          "description": "Number of periods",
+          "type": "integer",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "overrun": {
+          "format": "double",
+          "title": "Overrun %",
+          "description": "Overrun %",
+          "type": "number",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "payReference": {
+          "title": "Pay reference",
+          "description": "Pay reference",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "remindReference": {
+          "title": "Remind ref",
+          "description": "Remind ref",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "systemSetupCode": {
+          "title": "System setup code",
+          "description": "System setup code",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "taxOfficeName": {
+          "title": "Tax office name",
+          "description": "Tax office name",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "taxOfficeReference": {
+          "title": "Tax office ref",
+          "description": "Tax office ref",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "taxSystem": {
+          "title": "Tax system",
+          "description": "Tax system",
+          "type": "string",
+          "x-u4-attribute": {
+            "attributeId": "GK",
+            "metadata": "v1/attributes/GK",
+            "values": "v1/attribute-values/GK"
+          },
+          "x-u4-describable": {
+            "propertyName": "taxSystem(description)"
+          },
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "vatRegistrationNumber": {
+          "title": "VAT registration number",
+          "description": "VAT registration number",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "multiCompanyInformation": {
+          "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.Objects.Company.MultiCompanyInformation"
+        },
+        "accounting": {
+          "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.Objects.Company.Accounting"
+        },
+        "currencyInformation": {
+          "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.Objects.Company.CurrencyInformation"
+        },
+        "vatInformation": {
+          "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.Objects.Company.VatInformation"
+        },
+        "contactPoints": {
+          "type": "array",
+          "items": {
+            "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.Objects.ContactPoints_Dyn"
+          }
+        },
+        "lastUpdated": {
+          "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.Objects.LastUpdatedInformation"
+        }
+      }
+    },
+    "Unit4.BusinessWorld.PublicApi.Objects.Company.MultiCompanyInformation": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "currencyCompanyId": {
+          "title": "Currency company",
+          "description": "Currency company",
+          "type": "string",
+          "x-u4-attribute": {
+            "attributeId": "A3",
+            "metadata": "v1/attributes/A3",
+            "values": "v1/attribute-values/A3"
+          },
+          "x-u4-describable": {
+            "propertyName": "currencyCompanyId(description)"
+          },
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "headOffice": {
+          "title": "Head office",
+          "description": "Head office",
+          "type": "string",
+          "x-u4-attribute": {
+            "attributeId": "A3",
+            "metadata": "v1/attributes/A3",
+            "values": "v1/attribute-values/A3"
+          },
+          "x-u4-describable": {
+            "propertyName": "headOffice(description)"
+          },
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "legalActingCompanyId": {
+          "title": "Leg.act.company",
+          "description": "Leg.act.company",
+          "type": "string",
+          "x-u4-attribute": {
+            "attributeId": "A3",
+            "metadata": "v1/attributes/A3",
+            "values": "v1/attribute-values/A3"
+          },
+          "x-u4-describable": {
+            "propertyName": "legalActingCompanyId(description)"
+          },
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "remittanceCompanyId": {
+          "title": "Remitt company",
+          "description": "Remitt company",
+          "type": "string",
+          "x-u4-attribute": {
+            "attributeId": "A3",
+            "metadata": "v1/attributes/A3",
+            "values": "v1/attribute-values/A3"
+          },
+          "x-u4-describable": {
+            "propertyName": "remittanceCompanyId(description)"
+          },
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        }
+      }
+    },
+    "Unit4.BusinessWorld.PublicApi.Objects.Setup": {
+      "title": "Setup",
+      "required": [
+        "companyId",
+        "companyName",
+        "countryCode",
+        "languageCode",
+        "newCompanyId",
+        "systemSetupCode"
+      ],
+      "type": "object",
+      "properties": {
+        "companyId": {
+          "title": "Company",
+          "type": "string",
+          "x-u4-attribute": {
+            "attributeId": "A3",
+            "metadata": "/v2/attributes/A3",
+            "values": "/v2/attribute-values/A3"
+          },
+          "x-u4-filterable": {
+            "filterable": true
+          },
+          "x-u4-describable": {
+            "propertyName": "companyId(description)"
+          }
+        },
+        "companyName": {
+          "title": "Company name",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "companyRegistrationNumber": {
+          "title": "Company registration number",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "country": {
+          "title": "Country",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "countryCode": {
+          "title": "Country code",
+          "type": "string",
+          "x-u4-attribute": {
+            "attributeId": "C9",
+            "metadata": "/v2/attributes/C9",
+            "values": "/v2/attribute-values/C9"
+          },
+          "x-u4-filterable": {
+            "filterable": true
+          },
+          "x-u4-describable": {
+            "propertyName": "countryCode(description)"
+          }
+        },
+        "currentAccountingPeriod": {
+          "format": "int32",
+          "title": "Current accounting period",
+          "type": "integer",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "dimV2Type": {
+          "title": "Currency type",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "dimV3Type": {
+          "title": "Currency type",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "employerId": {
+          "title": "Employer ID",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "languageCode": {
+          "title": "Language",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "maximumTransactionDifference": {
+          "format": "double",
+          "title": "Maximum transaction difference",
+          "type": "number",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "maximumPaymentDifference": {
+          "format": "double",
+          "title": "Maximum payment difference",
+          "type": "number",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "municipal": {
+          "title": "Municipal",
+          "type": "string",
+          "x-u4-attribute": {
+            "attributeId": "CA",
+            "metadata": "/v2/attributes/CA",
+            "values": "/v2/attribute-values/CA"
+          },
+          "x-u4-filterable": {
+            "filterable": true
+          },
+          "x-u4-describable": {
+            "propertyName": "municipal(description)"
+          }
+        },
+        "newCompanyId": {
+          "title": "New company identifier",
+          "type": "string",
+          "x-u4-attribute": {
+            "attributeId": "A3",
+            "metadata": "/v2/attributes/A3",
+            "values": "/v2/attribute-values/A3"
+          },
+          "x-u4-filterable": {
+            "filterable": true
+          },
+          "x-u4-describable": {
+            "propertyName": "newCompanyId(description)"
+          }
+        },
+        "overrun": {
+          "format": "double",
+          "title": "Overrun %",
+          "type": "number",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "payReference": {
+          "title": "Pay reference",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "numberOfPeriods": {
+          "format": "int32",
+          "title": "Number of periods",
+          "type": "integer",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "remindReference": {
+          "title": "Remind ref",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "systemSetupCode": {
+          "title": "System setup code",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "taxOfficeName": {
+          "title": "Tax office name",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "taxOfficeReference": {
+          "title": "Tax office ref",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "taxSystem": {
+          "title": "Tax system",
+          "type": "string",
+          "x-u4-attribute": {
+            "attributeId": "GK",
+            "metadata": "/v2/attributes/GK",
+            "values": "/v2/attribute-values/GK"
+          },
+          "x-u4-filterable": {
+            "filterable": true
+          },
+          "x-u4-describable": {
+            "propertyName": "taxSystem(description)"
+          }
+        },
+        "vatRegistrationNumber": {
+          "title": "VAT registration number",
+          "type": "string",
+          "x-u4-filterable": {
+            "filterable": true
+          }
+        },
+        "multiCompanyInformation": {
+          "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.Objects.Setup.MultiCompanyInformation",
+          "title": "Connection"
+        },
+        "accounting": {
+          "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.Objects.Setup.Accounting",
+          "title": "Accounts"
+        },
+        "currencyInformation": {
+          "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.Objects.Setup.CurrencyInformation",
+          "title": "Currency"
+        },
+        "vatInformation": {
+          "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.Objects.Setup.VatInformation",
+          "title": "VAT"
+        },
+        "lastUpdated": {
+          "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.LastUpdatedInformation"
+        },
+        "contactPoints": {
+          "description": "Contact points group",
+          "type": "array",
+          "items": {
+            "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.ContactPoint"
+          }
+        },
+        "customFieldGroups": {
+          "description": "Documentation: List of flexi fields",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "/definitions/Object"
+          },
+          "x-u4-customFieldGroups": {
+            "attributeId": "A3",
+            "metadata": "/v1/custom-fields/A3"
+          }
+        },
+        "relatedValues": {
+          "description": "Documentation: List of related values",
+          "type": "array",
+          "items": {
+            "$ref": "/definitions/Unit4.BusinessWorld.PublicApi.RelatedValues"
+          },
+          "x-u4-relation": {
+            "attributeId": "A3",
+            "metadata": "/v2/relations/A3"
+          }
+        },
+        "notificationMessages": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "/definitions/Unit4.PublicApi.NotificationInformation"
+            }
+          }
+        }
+      }
+    }
+  }
+}

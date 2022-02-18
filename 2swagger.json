@@ -1,0 +1,167 @@
+{
+"swagger": "2.0",
+"info": {
+    "version": "v1",
+    "title": "Unit4 WebAPI documentation",
+    "description": "NMG Stuff"
+  },
+"host": "finapipoc001.azurewebsites.net",
+"basePath": "/swagger/index.html",
+"schemes": [
+    "https"
+  ],
+ "paths": {
+    "/v1/relations/{attributeId}": {
+      "get": {
+        "tags": [
+          "Extend and relate"
+        ],
+        "summary": "Retrieves list of all relations for specific attribute id and client",
+        "operationId": "Relation_GetRelations",
+		"x-ntx-summary": "Get Agresso Clients",
+		"security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "attributeId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "companyId",
+            "in": "query",
+            "description": "Company id",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Unit4.BusinessWorld.PublicApi.AttributeRelations"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/Unit4.PublicApi.NotificationInformation"
+            }
+          },
+          "404": {
+            "description": "NotFound",
+            "schema": {
+              "$ref": "#/definitions/Unit4.PublicApi.NotificationInformation"
+            }
+          },
+          "410": {
+            "description": "Gone",
+            "schema": {
+              "$ref": "#/definitions/Unit4.PublicApi.NotificationInformation"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+"definitions" : {
+      "Unit4.BusinessWorld.PublicApi.Objects.UserFilter": {
+      "title": "User filters",
+      "description": "User filters.",
+      "type": "object",
+      "properties": {
+        "fromAttribute": {
+          "title": "From attribute",
+          "description": "From attribute.",
+          "type": "string",
+          "x-u4-filterable": { "filterable": true }
+        },
+        "updatedAt": {
+          "format": "date-time",
+          "title": "Updated",
+          "description": "Updated.",
+          "type": "string",
+          "x-u4-filterable": { "filterable": true }
+        },
+        "onlyResponsibleFlag": {
+          "title": "Only responsible",
+          "description": "Only responsible.",
+          "type": "boolean",
+          "x-u4-filterable": { "filterable": true }
+        },
+        "level": {
+          "format": "int32",
+          "title": "Level",
+          "description": "Level.",
+          "type": "integer",
+          "x-u4-filterable": { "filterable": true }
+        },
+        "structureSetupId": {
+          "title": "Structure setup",
+          "description": "Structure setup.",
+          "type": "string",
+          "x-u4-attribute": {
+            "attributeId": "C13",
+            "metadata": "/v2/attributes/C13",
+            "values": "/v2/attribute-values/C13"
+          },
+          "x-u4-filterable": { "filterable": true },
+          "x-u4-describable": { "propertyName": "structureSetupId(description)" }
+        },
+        "targetValue": {
+          "title": "Target value",
+          "description": "Target value.",
+          "type": "string",
+          "x-u4-filterable": { "filterable": true }
+        },
+        "type": {
+          "title": "Type",
+          "description": "Type.",
+          "type": "string",
+          "x-u4-filterable": { "filterable": true }
+        },
+        "updatedBy": {
+          "title": "Updated by",
+          "description": "Updated by.",
+          "type": "string",
+          "x-u4-attribute": {
+            "attributeId": "GN",
+            "metadata": "/v2/attributes/GN",
+            "values": "/v2/attribute-values/GN"
+          },
+          "x-u4-filterable": { "filterable": true },
+          "x-u4-describable": { "propertyName": "updatedBy(description)" }
+        },
+        "viaRelation": {
+          "title": "Via relation",
+          "description": "Via relation.",
+          "type": "string",
+          "x-u4-filterable": { "filterable": true }
+        },
+        "notificationMessages": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "$ref": "#/definitions/Unit4.PublicApi.NotificationInformation" }
+          }
+        }
+      }
+    },
+"securityDefinitions": {
+		"basicAuth": {
+			"type": "basicAuth"
+    }
+},
+},
+}
+}
